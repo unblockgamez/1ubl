@@ -4,9 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>1v1.LOL</title>
+    <link rel="shortcut icon" href="style/favicon.ico">
     <link rel="stylesheet" href="style/style.css">
-	<script src="./UnityLoader.js"></script>
-    <script src="./UnityProgress.js"></script>
+	<script src="/adinLoader.js"></script>
+	<script src="UnityLoader.js"></script>
+    <script src="UnityProgress.js"></script>
     <script>
       var gameInstance = UnityLoader.instantiate("gameContainer", "build.php", {onProgress: UnityProgress,Module:{onRuntimeInitialized: function() {UnityProgress(gameInstance, "complete")}}});
     </script>
@@ -31,5 +33,44 @@
 	<script src="firebase.js"></script>
 	<script src="login.js"></script>
 	<script src="firebase-config.js"></script>
+	
+	<script>
+		initializeFireBase();
+		initRemoteConfig();
+		
+		window.unityInstance = gameInstance;
+		function showAds() {
+			console.log("show ads");
+        }
+
+		function requestNewAd(){
+		// Show video ad
+		unityAdFinishedCallback();
+		
+		}
+
+		function unityAdFinishedCallback(){
+		try{
+			if(gameInstance)
+				gameInstance.SendMessage('MainMenuManagers', 'OnWebCallback');
+		}
+		catch(error){
+			console.log(error);
+		}
+	}
+		function onUnityReady() {
+
+					sendConfig();
+				}
+	</script>
+	  <script>
+          if (typeof getAdinDomain !== 'undefined') {
+              const bodyTag = document.getElementsByTagName('body')[0];
+
+              let addAdinPreroll = document.createElement('script');
+              addAdinPreroll.src = getAdinDomain;
+              bodyTag.appendChild(addAdinPreroll);
+          }
+  </script>
   </body>
 </html>
