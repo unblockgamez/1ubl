@@ -17,7 +17,7 @@ h1.title {
 }
 #gameContainer {
 	width: 100vw;
-	height: 80vh;
+	height: 100vh
 	background: #000!important;
 }
 .container {
